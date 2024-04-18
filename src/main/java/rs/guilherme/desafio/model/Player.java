@@ -9,11 +9,11 @@ import lombok.Data;
 import rs.guilherme.desafio.model.enums.HeroGroup;
 
 
-@Entity(name = "users")
+@Entity(name = "Players")
 @Data
-public class User {
+public class Player {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotNull
