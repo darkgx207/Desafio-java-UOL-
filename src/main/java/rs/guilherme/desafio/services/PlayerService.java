@@ -1,14 +1,10 @@
 package rs.guilherme.desafio.services;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Random;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import rs.guilherme.desafio.model.Player;
-import rs.guilherme.desafio.model.dtos.UserDto;
+import rs.guilherme.desafio.model.dtos.PlayerDto;
 import rs.guilherme.desafio.model.enums.HeroGroup;
 import rs.guilherme.desafio.repositories.PlayerRepository;
 
@@ -24,7 +20,7 @@ public class PlayerService {
         this.codinameFetch = codinameFetch;
     }
 
-    public Player createNewPlayer(UserDto user) {
+    public Player createNewPlayer(PlayerDto user) {
         Player player = null;
         try {
             player = new Player();

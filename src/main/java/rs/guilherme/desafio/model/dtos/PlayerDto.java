@@ -2,7 +2,7 @@ package rs.guilherme.desafio.model.dtos;
 
 import rs.guilherme.desafio.model.enums.HeroGroup;
 
-public record UserDto
+public record PlayerDto
 (
     String name,
     String email,

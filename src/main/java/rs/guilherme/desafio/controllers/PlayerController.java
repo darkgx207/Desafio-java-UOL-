@@ -6,12 +6,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import jakarta.validation.Valid;
 import rs.guilherme.desafio.model.Player;
-import rs.guilherme.desafio.model.dtos.UserDto;
-import rs.guilherme.desafio.repositories.PlayerRepository;
-import rs.guilherme.desafio.services.CodinameFetch;
+import rs.guilherme.desafio.model.dtos.PlayerDto;
 import rs.guilherme.desafio.services.PlayerService;
 
 @RestController
@@ -26,7 +23,7 @@ public class PlayerController {
 
 
     @PostMapping
-    public ResponseEntity<Player> savePlayer(@RequestBody @Valid UserDto user) {
+    public ResponseEntity<Player> savePlayer(@RequestBody @Valid PlayerDto user) {
         Player player = playerService.createNewPlayer(user);
         if (player == null) {
             return new ResponseEntity<>(player,HttpStatus.valueOf(400));
