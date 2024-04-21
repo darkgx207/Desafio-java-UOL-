@@ -1,0 +1,7 @@
+{
+  "name": "playersClient",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

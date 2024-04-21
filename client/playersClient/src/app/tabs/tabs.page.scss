@@ -1,0 +1,16 @@
+.icon {
+    color: aliceblue;
+}
+
+ion-icon {
+    color: #fff;
+}
+
+.tab-selected {
+    background-color: #292b2bde;
+    border-radius: 5px;
+    color: rgb(0, 255, 55);
+    ion-icon {
+        color: rgb(0, 255, 55);
+    }
+}

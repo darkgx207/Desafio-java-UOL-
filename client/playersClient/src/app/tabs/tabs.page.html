@@ -1,0 +1,15 @@
+<ion-tabs #tabs>
+  <ion-tab-bar slot="bottom" (click)="getTab(tabs)">
+    
+    <ion-tab-button tab="tab1" href="/tabs/tab1" [class]="this.selected=='tab1'  ? 'tab-selected': ''">
+      <ion-icon [icon]="icons.personAdd"/>
+      <ion-label>Register</ion-label>
+    </ion-tab-button>
+    
+    <ion-tab-button tab="tab2" href="/tabs/tab2" [class]="this.selected=='tab2'  ? 'tab-selected': ''">
+      <ion-icon [icon]="icons.peopleSharp" size="large"></ion-icon>
+      <ion-label> Players </ion-label>
+    </ion-tab-button>
+
+  </ion-tab-bar>
+</ion-tabs>
