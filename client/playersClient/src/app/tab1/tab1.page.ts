@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonIcon } from '@ionic/angular/standalone';
-import { addIcons } from 'ionicons';
 import { person } from 'ionicons/icons';
+import { Player } from '../model/Player';
+import { FormsModule } from '@angular/forms';
+import { ApiService } from '../services/apiService.service';
+
 
 
 @Component({
@@ -10,11 +12,24 @@ import { person } from 'ionicons/icons';
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
   standalone: true,
-  imports: [IonicModule],
+  imports: [IonicModule,FormsModule],
 })
+
 export class Tab1Page {
   public icons = { person }
-  constructor() {
-    addIcons({})
+
+  public player:Player = new Player()
+
+  
+  constructor(
+    private apiService:ApiService
+  ) {
+    
+  }
+
+  register() {
+    console.log(this.player)
+    this.apiService.savePlayer(this.player)
+
   }
 }
