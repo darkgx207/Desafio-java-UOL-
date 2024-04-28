@@ -21,8 +21,8 @@
     
     
   </ion-card>
-    @if ((players | async)?.length == 0) {
-      <ion-item class="text-center"> <ion-label> THERE'S NO PLAYER </ion-label> </ion-item> 
+    @if ( (players|async)?.length == 0) {
+      <ion-item class="text-center"> <ion-label> THERE'S NO PLAYERS </ion-label> </ion-item> 
     }
 
     @for (p of players|async; track p.id) {

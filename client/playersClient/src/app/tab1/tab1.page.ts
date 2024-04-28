@@ -31,13 +31,17 @@ export class Tab1Page {
   
 
   async register() {
-    if (this.failedEmail) { return }
     this.player.phoneNumber = this.player.phoneNumber?.split('').filter( char => ![')','('].includes(char)).join('')
-    this.apiService.savePlayer(this.player).subscribe ( async res => {
-      const header = (res.status == 201) ? 'Sucesso' : 'Erro'
-      const msg = (res.status == 201) ? 'Seu jogador foi registrado com sucesso.' : 'Seu jogador não pôde ser registrado.'
-      const alert = await this.alert.create({ header: header , message: msg , buttons : ['Close'] })
-      alert.present()
+    this.apiService.savePlayer(this.player).subscribe ({
+      next: async res => {
+        const header = (res.status == 201) ? 'Sucesso' : 'Erro'
+        const msg = (res.status == 201) ? 'Seu jogador foi registrado com sucesso.' : 'Seu jogador não pôde ser registrado.'
+        const alert = await this.alert.create({ header: header , message: msg , buttons : ['Close'] })
+        alert.present()
+  
+        this.player = new Player()
+      },
+      error: async () =>  (await this.alert.create({ header: 'Erro' , message: 'Servidor indisponível' , buttons : ['Close'] })).present() 
     })
   }
 
