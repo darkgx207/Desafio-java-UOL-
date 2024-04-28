@@ -25,7 +25,6 @@ public class PlayerController {
         this.playerService = playerService;
     }
 
-
     @PostMapping 
     @CrossOrigin(value = "http://localhost:8100")
     public ResponseEntity<Player> savePlayer(@RequestBody @Valid PlayerDto user) {

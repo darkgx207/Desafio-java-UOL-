@@ -1,10 +1,11 @@
 import { Component, inject } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { AlertController, IonicModule } from '@ionic/angular';
 import { person } from 'ionicons/icons';
 import { Player } from '../model/Player';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from '../services/apiService.service';
-
+import { MaskitoDirective } from '@maskito/angular';
+import { MaskitoOptions, MaskitoElementPredicate } from '@maskito/core';
 
 
 @Component({
@@ -12,24 +13,39 @@ import { ApiService } from '../services/apiService.service';
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
   standalone: true,
-  imports: [IonicModule,FormsModule],
+  imports: [IonicModule,FormsModule,MaskitoDirective],
 })
 
 export class Tab1Page {
-  public icons = { person }
+  readonly phoneMask: MaskitoOptions = { mask : ['(',/\d/,/\d/,')',/\d/,/\d/,/\d/,/\d/,/\d/,/\d/,/\d/,/\d/,/\d/] }
+  readonly maskPredicate: MaskitoElementPredicate = async (el) => (el as HTMLIonInputElement).getInputElement();
+  public failedEmail: boolean = false
 
-  public player:Player = new Player()
-
-  
   constructor(
-    private apiService:ApiService
-  ) {
-    
+    private apiService:ApiService,
+    private alert:AlertController
+  ) {}
+
+  public icons = { person }
+  public player:Player = new Player()
+  
+
+  async register() {
+    if (this.failedEmail) { return }
+    this.player.phoneNumber = this.player.phoneNumber?.split('').filter( char => ![')','('].includes(char)).join('')
+    this.apiService.savePlayer(this.player).subscribe ( async res => {
+      const header = (res.status == 201) ? 'Sucesso' : 'Erro'
+      const msg = (res.status == 201) ? 'Seu jogador foi registrado com sucesso.' : 'Seu jogador não pôde ser registrado.'
+      const alert = await this.alert.create({ header: header , message: msg , buttons : ['Close'] })
+      alert.present()
+    })
   }
 
-  register() {
-    console.log(this.player)
-    this.apiService.savePlayer(this.player)
 
+  validateEmail(event:Event) {
+    this.failedEmail = false
+    
+    if (!this.player.email?.includes('@')) { this.failedEmail = true }
+    if (!this.player.email?.substring(this.player.email.indexOf('@')).includes('.') ) { this.failedEmail = true }
   }
 }

@@ -7,39 +7,76 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">    
+    <ion-fab-button (click)="update()">
+      <ion-icon [icon]="icons.refresh" />
+    </ion-fab-button>
+  </ion-fab>
+
   <ion-card>
     
-    <ion-title class="text-black">Jogadores Cadastrados</ion-title>
+    <ion-title class="text-black text-center">
+      <ion-label>Jogadores Cadastrados</ion-label>
+    </ion-title>
+    
+    
+  </ion-card>
+    @if ((players | async)?.length == 0) {
+      <ion-item class="text-center"> <ion-label> THERE'S NO PLAYER </ion-label> </ion-item> 
+    }
 
-    <ion-card>
+    @for (p of players|async; track p.id) {
+        <ion-card class="shadow-xl border-solid border-gray-500" style="border: 1px solid">
+        <ion-list>
 
-      <ion-row >
-        <ion-col><b> NOME </b> </ion-col>
-        <ion-col> Guilherme  </ion-col>
-      </ion-row>
+          <ion-item class="flex flex-row">
+            <div>
+              <ion-row class=""><b> Id </b></ion-row>
+              <ion-row class="text-xs"> {{ p.id }}  </ion-row>
+            </div>
+          </ion-item>
 
-      <ion-row >
-        <ion-col><b> EMAIL </b> </ion-col>
-        <ion-col> Guilherme  </ion-col>
-      </ion-row>
+          <ion-item class="flex flex-row">
+            <div>
+              <ion-row class=""><b> Name </b></ion-row>
+              <ion-row class="text-xs"> {{ p.name }}  </ion-row>
+            </div>
+          </ion-item>
 
-      <ion-row >
-        <ion-col><b> TELEFONE </b> </ion-col>
-        <ion-col> Guilherme  </ion-col>
-      </ion-row>
+          <ion-item class="flex flex-row">
+            <div>
+              <ion-row class=""><b> Email </b></ion-row>
+              <ion-row class="text-xs"> {{ p.email }}  </ion-row>
+            </div>
+          </ion-item>
 
-      <ion-row >
-        <ion-col><b> CODINOME </b> </ion-col>
-        <ion-col> Guilherme  </ion-col>
-      </ion-row>
+          <ion-item class="flex flex-row">
+            <div>
+              <ion-row class=""><b> Telefone </b></ion-row>
+              <ion-row class="text-xs"> {{p.phoneNumber}}  </ion-row>
+            </div>
+          </ion-item>
 
-      <ion-row >
-        <ion-col><b> GRUPO </b> </ion-col>
-        <ion-col> Guilherme  </ion-col>
-      </ion-row>
+          <ion-item class="flex flex-row">
+            <div>
+              <ion-row class=""><b> Codinome </b></ion-row>
+              <ion-row class="text-xs"> {{p.codiname}}  </ion-row>
+            </div>
+          </ion-item>
+    
+          <ion-item class="flex flex-row mb-2">
+            <div>
+              <ion-row class=""><b> Grupo </b></ion-row>
+              <ion-row class="text-xs"> {{p.heroGroup}}  </ion-row>
+            </div>
+          </ion-item>
+
+        </ion-list>
+      </ion-card>
+      }
       
-    </ion-card>
+
+      
 
    
-  </ion-card>
 </ion-content>

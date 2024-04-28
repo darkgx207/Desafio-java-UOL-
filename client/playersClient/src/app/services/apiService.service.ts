@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Player } from '../model/Player';
-
+import { IPlayerEntity} from '../model/interfaces/IPlayerEntity'
 @Injectable({
   providedIn: 'root'
 })
@@ -16,17 +16,12 @@ export class ApiService {
 
 
   getAllPlayers() {
-    this.http.get(`${this.api}/player`).subscribe( res => {
-      console.log(res)
-    })
+    return this.http.get<IPlayerEntity[]>(`${this.api}/player`)
   }
 
 
   savePlayer(player:Player) {
-    this.http.post(`${this.api}/player`, player).subscribe( res => {
-      console.log(res)
-    })
+    return this.http.post(`${this.api}/player`, player, { observe: 'response' })
   }
-
 
 }

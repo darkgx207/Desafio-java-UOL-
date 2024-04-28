@@ -8,36 +8,46 @@
 
   <ion-card class="shadow-xl p-4">
     
+    <form #form="ngForm">
     <ion-list >
       <ion-item  class="text-xl"><p><b>CADASTRO DE JOGADORES UOL</b></p></ion-item>
       
       <ion-item class="text-sm mt-4">
-        <ion-input label="Nome" labelPlacement="floating" placeholder="Digite o nome do jogador" shape="round" class="mx-2" [(ngModel)]="player.name"/>
+        <ion-input label="Nome" labelPlacement="floating" placeholder="Digite o nome do jogador" shape="round" class="mx-2" [(ngModel)]="player.name" name="name" required/>
+      </ion-item>
+      
+      <ion-item class="text-sm">
+        <div>
+          <ion-input label="Email" labelPlacement="floating" placeholder="Digite o email do jogador" class="mx-2" [(ngModel)]="player.email" name="email"
+          (ionBlur)="validateEmail($event)" required/>
+  
+          @if(failedEmail) { <div class="text-center" ><p class="text-xs text-red-500">Email Invalido</p></div> }
+        </div>
+        
       </ion-item>
 
       <ion-item class="text-sm">
-        <ion-input label="Email" labelPlacement="floating" placeholder="Digite o email do jogador" class="mx-2" [(ngModel)]="player.email"/>
-      </ion-item>
-
-      <ion-item class="text-sm">
-        <ion-input label="Telefone" labelPlacement="floating" placeholder="Digite o telefone do jogador" class="mx-2" [(ngModel)]="player.phoneNumber"/>
+        <ion-input label="Telefone" labelPlacement="floating" placeholder="Digite o telefone do jogador" class="mx-2" minlength="13" maxlength="13" [(ngModel)]="player.phoneNumber" 
+        [maskito]="phoneMask" [maskitoElement]="maskPredicate" name="phone" required/>
       </ion-item>
 
 
       <ion-item class="mt-4"><p><b>Quero ser do grupo</b></p></ion-item>
       
       <ion-item>
-        <ion-radio-group [(ngModel)]="player.heroGroup">
+        <ion-radio-group [(ngModel)]="player.heroGroup" name="group" required>
           <ion-radio value="JUSTICE_LEAGUE" >Liga da justiça</ion-radio> <br/>
           <ion-radio value="AVENGERS" >Vingadores</ion-radio>
         </ion-radio-group>
       </ion-item>
     </ion-list>
+  </form>
   </ion-card>
   <ion-row class="justify-center">
-      <ion-button (click)="register()">Cadastrar</ion-button>
+      <ion-button (click)="register()" [disabled]="!form.valid || failedEmail">Cadastrar</ion-button>
   </ion-row>
 
+  <ion-alert header="" />
 
 
 
