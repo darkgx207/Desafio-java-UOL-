@@ -16,16 +16,11 @@ export class TabsPage {
   public icons = { triangle, ellipse, square,caretBackOutline, peopleSharp, personAdd }
   public selected?:string = 'tab1'
   
-  constructor(
-    
-  ) {
-    
-  }
+  constructor() {}
 
   
   public getTab(tab:IonTabs):void {
     this.selected = tab.getSelected()
-    console.log(this.selected)
   }
 
 }

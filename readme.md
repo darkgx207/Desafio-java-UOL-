@@ -6,5 +6,9 @@ O Desafio foi realizado utilizando as seguintes ferramentas:
 - Spring Boot
 - H2 Database
 - JPA
-- Swagger
+
+Ferramentas opcionais usadas no frontend
+- Ionic/Angular
+- tailwind css
+
 
